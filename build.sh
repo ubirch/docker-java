@@ -55,6 +55,8 @@ case "$1" in
         build_container
         ;;
     publish)
+        fetch_got-tools
+        init
         publish_container
         ;;
     *)
