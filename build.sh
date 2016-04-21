@@ -1,28 +1,5 @@
 #!/bin/bash -x
 
-NEW_LABEL=""
-
-
-function fetch_got-tools() {
-
-    if [ -d go-tools ]; then
-      # update the existing repo
-      cd go-tools
-      git pull
-      if [ $? -ne 0 ]; then exit 1; fi
-      cd ..
-    else
-      # check out out GO tools
-      git clone https://github.com/ubirch/go-tools.git
-      if [ $? -ne 0 ]; then exit 1; fi
-    fi
-
-
-}
-
-function init() {
-  NEW_LABEL=`./go-tools/concat-labels.sh`
-}
 
 # build the docker container
 function build_container() {
@@ -31,7 +8,7 @@ function build_container() {
   mkdir -p VAR && docker build --build-arg JAVA_VERSION=${JAVA_VERSION:=8} \
     --build-arg JAVA_UPDATE=${JAVA_UPDATE:=77} \
     --build-arg JAVA_BUILD=${JAVA_BUILD:=03} \
-    -t ubirch/java:v${NEW_LABEL} .
+    -t ubirch/java:v${GO_PIPELINE_LABEL} .
     if [ $? -eq 0 ]; then
       echo ${JAVA_VERSION:=8} > VAR/JAVA_VERSION
       echo ${JAVA_UPDATE:=77} > VAR/JAVA_UPDATE
@@ -45,11 +22,11 @@ function build_container() {
 
 # publish the new docker container
 function publish_container() {
-  echo "Publishing Docker Container with version: ${NEW_LABEL}"
-  docker push ubirch/java:v${NEW_LABEL}
+  echo "Publishing Docker Container with version: ${GO_PIPELINE_LABEL}"
+  docker push ubirch/java:v${GO_PIPELINE_LABEL}
 
   if [ $? -eq 0 ]; then
-    echo ${NEW_LABEL} > VAR/GO_PIPELINE_NAME_${GO_PIPELINE_NAME}
+    echo ${NEW_LABEL} > VAR/${GO_PIPELINE_NAME}_${GO_STAGE_NAME}
   else
     echo "Docker push faild"
     exit 1
@@ -60,13 +37,9 @@ function publish_container() {
 
 case "$1" in
     build)
-        fetch_got-tools
-        init
         build_container
         ;;
     publish)
-        fetch_got-tools
-        init
         publish_container
         ;;
     *)
