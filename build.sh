@@ -23,8 +23,7 @@ function build_container() {
 # publish the new docker container
 function publish_container() {
   echo "Publishing Docker Container with version: ${GO_PIPELINE_LABEL}"
-  docker push ubirch/java:v${GO_PIPELINE_LABEL}
-
+  docker push ubirch/java:v${GO_PIPELINE_LABEL} && docker push ubirch/java
   if [ $? -eq 0 ]; then
     echo ${NEW_LABEL} > VAR/${GO_PIPELINE_NAME}_${GO_STAGE_NAME}
   else
