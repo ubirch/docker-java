@@ -6,8 +6,8 @@ function build_container() {
   echo "Building container with JAVA_VERSION=${JAVA_VERSION} JAVA_UPDATE=${JAVA_UPDATE} JAVA_BUILD=${JAVA_BUILD}"
 
   mkdir -p VAR && docker build --build-arg JAVA_VERSION=${JAVA_VERSION:=8} \
-    --build-arg JAVA_UPDATE=${JAVA_UPDATE:=77} \
-    --build-arg JAVA_BUILD=${JAVA_BUILD:=03} \
+    --build-arg JAVA_UPDATE=${JAVA_UPDATE:=92} \
+    --build-arg JAVA_BUILD=${JAVA_BUILD:=14} \
     -t ubirch/java:v${GO_PIPELINE_LABEL} .
     if [ $? -eq 0 ]; then
       echo ${JAVA_VERSION:=8} > VAR/JAVA_VERSION
