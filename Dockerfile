@@ -1,6 +1,7 @@
 FROM debian:jessie
 MAINTAINER Falko Zurell <falko.zurell@ubirch.com>
 
+# These are just a fall back. They are not used called via our normal build.sh
 ARG JAVA_VERSION=8
 ARG JAVA_UPDATE=92
 ARG JAVA_BUILD=14
