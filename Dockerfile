@@ -2,7 +2,7 @@ FROM debian:jessie
 MAINTAINER Falko Zurell <falko.zurell@ubirch.com>
 
 ARG JAVA_VERSION=8
-ARG JAVA_UPDATE=45
+ARG JAVA_UPDATE=92
 ARG JAVA_BUILD=14
 
 ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-oracle
