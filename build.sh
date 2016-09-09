@@ -6,15 +6,15 @@ function build_container() {
   echo "Building container with JAVA_VERSION=${JAVA_VERSION} JAVA_UPDATE=${JAVA_UPDATE} JAVA_BUILD=${JAVA_BUILD}"
 
   mkdir -p VAR && docker build --build-arg JAVA_VERSION=${JAVA_VERSION:=8} \
-    --build-arg JAVA_UPDATE=${JAVA_UPDATE:=92} \
-    --build-arg JAVA_BUILD=${JAVA_BUILD:=14} \
+    --build-arg JAVA_UPDATE=${JAVA_UPDATE:=101} \
+    --build-arg JAVA_BUILD=${JAVA_BUILD:=-b13} \
     --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
     --build-arg VCS_REF=`git rev-parse --short HEAD` \
     -t ubirch/java:v${GO_PIPELINE_LABEL} .
     if [ $? -eq 0 ]; then
       echo ${JAVA_VERSION:=8} > VAR/JAVA_VERSION
-      echo ${JAVA_UPDATE:=92} > VAR/JAVA_UPDATE
-      echo ${JAVA_BUILD:=14} > VAR/JAVA_BUILD
+      echo ${JAVA_UPDATE:=101} > VAR/JAVA_UPDATE
+      echo ${JAVA_BUILD:=-b13} > VAR/JAVA_BUILD
       echo ${NEW_LABEL} > VAR/${GO_PIPELINE_NAME}_${GO_STAGE_NAME}
     else
       echo "Docker build faild"
