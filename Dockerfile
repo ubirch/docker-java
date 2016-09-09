@@ -6,6 +6,18 @@ ARG JAVA_VERSION=8
 ARG JAVA_UPDATE=101
 ARG JAVA_BUILD=-b13
 
+# Build-time metadata as defined at http://label-schema.org
+  ARG BUILD_DATE
+  ARG VCS_REF
+  LABEL org.label-schema.build-date=$BUILD_DATE \
+        org.label-schema.docker.dockerfile="/Dockerfile" \
+        org.label-schema.license="MIT" \
+        org.label-schema.name="ubirch basic java container" \
+        org.label-schema.url="https://ubirch.com" \
+        org.label-schema.vcs-ref=$VCS_REF \
+        org.label-schema.vcs-type="Git" \
+        org.label-schema.vcs-url="https://github.com/ubirch/docker-java"
+
 ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-oracle
 # Java 8 URL: http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.tar.gz
 
