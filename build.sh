@@ -13,8 +13,8 @@ function build_container() {
     -t ubirch/java:v${GO_PIPELINE_LABEL} .
     if [ $? -eq 0 ]; then
       echo ${JAVA_VERSION:=8} > VAR/JAVA_VERSION
-      echo ${JAVA_UPDATE:=77} > VAR/JAVA_UPDATE
-      echo ${JAVA_BUILD:=03} > VAR/JAVA_BUILD
+      echo ${JAVA_UPDATE:=92} > VAR/JAVA_UPDATE
+      echo ${JAVA_BUILD:=14} > VAR/JAVA_BUILD
       echo ${NEW_LABEL} > VAR/${GO_PIPELINE_NAME}_${GO_STAGE_NAME}
     else
       echo "Docker build faild"
