@@ -24,14 +24,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-oracle
 
 
 RUN apt-get update && apt-get install ca-certificates curl -y
-RUN echo http://download.oracle.com/otn-pub/java/jdk/"${JAVA_VERSION}"u"${JAVA_UPDATE}${JAVA_BUILD}"/jdk-"${JAVA_VERSION}"u"${JAVA_UPDATE}"-linux-x64.tar.gz
-RUN curl --silent --location --retry 3 --cacert /etc/ssl/certs/GeoTrust_Global_CA.pem \
-    --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-    http://download.oracle.com/otn-pub/java/jdk/"${JAVA_VERSION}"u"${JAVA_UPDATE}${JAVA_BUILD}"/jdk-"${JAVA_VERSION}"u"${JAVA_UPDATE}"-linux-x64.tar.gz \
-    | tar xz -C /tmp && \
-    mkdir -p /usr/lib/jvm && mv /tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE} "${JAVA_HOME}" && \
-    apt-get autoclean && apt-get --purge -y autoremove && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /
+COPY jdk-8u144-linux-i586.tar.gz /
+RUN tar xfz /jdk-8u144-linux-i586.tar.gz -C /tmp && \
+    mkdir -p /usr/lib/jvm && mv /tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE} "${JAVA_HOME}"
 
 RUN update-alternatives --install "/usr/bin/java" "java" "${JAVA_HOME}/bin/java" 1 && \
     update-alternatives --install "/usr/bin/javaws" "javaws" "${JAVA_HOME}/bin/javaws" 1 && \
@@ -40,6 +36,8 @@ RUN update-alternatives --install "/usr/bin/java" "java" "${JAVA_HOME}/bin/java"
     update-alternatives --set javaws "${JAVA_HOME}/bin/javaws" && \
     update-alternatives --set javac "${JAVA_HOME}/bin/javac"
 
+RUN apt-get autoclean && apt-get --purge -y autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN mkdir /build
 VOLUME /build
 WORKDIR /build
