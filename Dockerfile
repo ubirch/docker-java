@@ -25,7 +25,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-oracle
 
 RUN apt-get update && apt-get install ca-certificates curl -y
 WORKDIR /
-COPY jdk-8u144-linux-i586.tar.gz /
+COPY jdk-8u144-linux-x64.tar.gz /
 RUN tar xfz /jdk-8u144-linux-x64.tar.gz -C /tmp && \
     mkdir -p /usr/lib/jvm && mv /tmp/jdk1.8.0_144 "${JAVA_HOME}"
 
