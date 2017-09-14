@@ -7,8 +7,8 @@ function build_container() {
 
 
   # Fetch JDK:
-  if [ ! -f jdk-8u144-linux-i586.tar.gz ]; then
-    curl -L -b "oraclelicense=a" http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-i586.tar.gz -O jdk-8u144-linux-i586.tar.gz
+  if [ ! -f jdk-8u144-linux-x64.tar.gz ]; then
+    curl -L -b "oraclelicense=a" http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz -O jdk-8u144-linux-x64.tar.gz
   fi
   mkdir -p VAR && docker build --build-arg JAVA_VERSION=${JAVA_VERSION:=8} \
     --build-arg JAVA_UPDATE=${JAVA_UPDATE:=144} \
