@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install ca-certificates curl -y
 WORKDIR /
 COPY jdk-8u144-linux-i586.tar.gz /
 RUN tar xfz /jdk-8u144-linux-i586.tar.gz -C /tmp && \
-    mkdir -p /usr/lib/jvm && mv /tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE} "${JAVA_HOME}"
+    mkdir -p /usr/lib/jvm && mv /tmp/jdk1.8.0_144 "${JAVA_HOME}"
 
 RUN update-alternatives --install "/usr/bin/java" "java" "${JAVA_HOME}/bin/java" 1 && \
     update-alternatives --install "/usr/bin/javaws" "javaws" "${JAVA_HOME}/bin/javaws" 1 && \
