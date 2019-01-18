@@ -23,7 +23,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VERSION}-oracle
 # Java 8 URL: http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.tar.gz
 
 
-RUN apt-get update && apt-get install ca-certificates curl -y
+RUN apt-get update && apt-get install ca-certificates curl procps -y
 WORKDIR /
 COPY jdk-8u144-linux-x64.tar.gz /
 RUN tar xfz /jdk-8u144-linux-x64.tar.gz -C /tmp && \
